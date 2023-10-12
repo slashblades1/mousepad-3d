@@ -1,3 +1,7 @@
+//5222600030_Muhammad Fatih Tahir
+//5222600024_Faiz Gibran Hilmi Indrato
+
+
 #include <GL/glut.h>
 
 float rotationX = 0.0f;
