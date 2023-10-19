@@ -1,78 +1,76 @@
 //5222600030_Muhammad Fatih Tahir
 //5222600024_Faiz Gibran Hilmi Indrato
-
-
 #include <GL/glut.h>
 
-float rotationX = 0.0f;
-float rotationY = 0.0f;
+float rotasiX = 0.0f;
+float rotasiY = 0.0f;
 
-void display() {
-    // Clear the color buffer and depth buffer with white color
+void tampilan() {
+    // Bersihkan buffer warna dan buffer kedalaman dengan warna putih
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to white
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Setel warna latar belakang menjadi putih
 
-    // Set up the view and projection matrices
+    // Atur matriks tampilan dan proyeksi
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, 1.0f, 0.1f, 10.0f); // Perspective projection
+    gluPerspective(45.0f, 1.0f, 0.1f, 10.0f); // Proyeksi perspektif
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0.0f, 0.0f, 2.5f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f); // Camera position
+    gluLookAt(0.0f, 0.0f, 2.5f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f); // Posisi kamera
 
-    // Apply rotations
-    glRotatef(rotationX, 1.0f, 0.0f, 0.0f);
-    glRotatef(rotationY, 0.0f, 1.0f, 0.0f);
+    // Terapkan rotasi
+    glRotatef(rotasiX, 1.0f, 0.0f, 0.0f);
+    glRotatef(rotasiY, 0.0f, 1.0f, 0.0f);
 
-    // Draw the 3D mousepad (a thinner rectangle)
-    glColor3f(0.0f, 0.0f, 0.0f); // Set color to black
+    // Gambar mousepad 3D (sebuah persegi panjang yang lebih tipis)
+    glColor3f(0.0f, 0.0f, 0.0f); // Atur warna menjadi hitam
 
     glPushMatrix();
-    glTranslatef(-0.45f, -0.25f, -0.02f); // Set the position along the z-axis
-    glScalef(0.9f, 0.5f, 0.04f); // Scale to create the thinner rectangle
-    glutSolidCube(1.0f); // Draw a solid cube
+    glTranslatef(-0.45f, -0.25f, -0.02f); // Atur posisi sepanjang sumbu z
+    glScalef(0.9f, 0.5f, 0.04f); // Skala untuk membuat persegi panjang yang lebih tipis
+    glutSolidCube(1.0f); // Gambar sebuah kubus solid
     glPopMatrix();
 
-    // Swap the front and back buffers to display the rendered image
+    // Tukar buffer depan dan belakang untuk menampilkan gambar yang dirender
     glutSwapBuffers();
 }
 
-void specialKeys(int key, int x, int y) {
-    // Handle arrow key presses to rotate the mousepad
-    switch (key) {
+void tombolSpesial(int tombol, int x, int y) {
+    // Tangani penekanan tombol panah untuk memutar mousepad
+    switch (tombol) {
     case GLUT_KEY_UP:
-        rotationX += 5.0f;
+        rotasiX += 5.0f;
         break;
     case GLUT_KEY_DOWN:
-        rotationX -= 5.0f;
+        rotasiX -= 5.0f;
         break;
     case GLUT_KEY_LEFT:
-        rotationY += 5.0f;
+        rotasiY += 5.0f;
         break;
     case GLUT_KEY_RIGHT:
-        rotationY -= 5.0f;
+        rotasiY -= 5.0f;
         break;
     }
-    glutPostRedisplay(); // Request a redraw to see the changes
+    glutPostRedisplay(); // Minta penggambaran ulang untuk melihat perubahan
 }
 
 int main(int argc, char** argv) {
-    // Initialize GLUT and create a window
+    // Inisialisasi GLUT dan buat jendela
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-    glutCreateWindow("Even Thinner 3D Mousepad");
+    glutCreateWindow("Mousepad 3D yang Lebih Tipis");
 
-    // Enable depth testing for 3D rendering
+    // Aktifkan pengujian kedalaman untuk penggambaran 3D
     glEnable(GL_DEPTH_TEST);
 
-    // Set the display function
-    glutDisplayFunc(display);
+    // Atur fungsi tampilan
+    glutDisplayFunc(tampilan);
 
-    // Set the special function for arrow key presses
-    glutSpecialFunc(specialKeys);
+    // Atur fungsi khusus untuk penekanan tombol panah
+    glutSpecialFunc(tombolSpesial);
 
-    // Enter the GLUT main loop
+    // Masuk ke loop utama GLUT
     glutMainLoop();
 
     return 0;
