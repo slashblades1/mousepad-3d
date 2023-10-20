@@ -54,9 +54,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-Semoga ini membantu! Kode tersebut adalah contoh sederhana untuk menggambar mousepad persegi panjang dengan kemampuan putar manual menggunakan OpenGL.
-
-
-
-
-
